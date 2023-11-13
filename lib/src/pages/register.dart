@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_part2/src/models/user_model.dart';
-import 'package:flutter_part2/src/pages/login1.dart';
+
+import '../repository/user_repository.dart' as userRepo;
 import '../widgets/background_widget.dart';
 
 class Register extends StatefulWidget {
@@ -11,15 +12,16 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-GlobalKey<FormState> keyForm = GlobalKey<FormState>();
+  GlobalKey<FormState> keyForm = GlobalKey<FormState>();
 
+  int x = 0;
   String? firstName;
   String? lastName;
   String? phone;
   String? email;
   String? password;
+  String? confirmPassword;
   String? address;
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                       Padding(
+                      Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Column(
                           children: [
@@ -57,7 +59,7 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                                     firstName = value;
                                   });
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
@@ -86,12 +88,12 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextField(
                                 onChanged: (value) {
                                   lastName = value;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
@@ -125,7 +127,7 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                                 onChanged: (value) {
                                   phone = value;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
@@ -159,7 +161,7 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                                 onChanged: (value) {
                                   email = value;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
@@ -191,9 +193,9 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                               padding: EdgeInsets.all(8.0),
                               child: TextField(
                                 onChanged: (value) {
-                                  address = value;
+                                  password = value;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
@@ -216,16 +218,49 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                                       color: Colors.blueAccent,
                                     ),
                                   ),
-                                  labelText: "Address",
+                                  labelText: "Password",
                                   prefixIcon: Icon(Icons.lock),
                                 ),
                               ),
                             ),
-                            Text(
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                onChanged: (value) {
+                                  confirmPassword = value;
+                                },
+                                decoration: const InputDecoration(
+                                  isDense: true,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFDDDDDD),
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                    ),
+                                  ),
+                                  labelText: "Confirm Password",
+                                  prefixIcon: Icon(Icons.lock),
+                                ),
+                              ),
+                            ),
+                            const Text(
                               "Incorrect email or password",
                               style: TextStyle(color: Colors.red),
                             ),
-
                           ],
                         ),
                       ),
@@ -256,28 +291,28 @@ GlobalKey<FormState> keyForm = GlobalKey<FormState>();
                           children: [
                             TextButton(
                               onPressed: () {
-                               print(firstName);
-                                print(lastName);
-                                print(phone);
-                                print(email);
-                                print(password);
-                                print(address);
-
                                 var objUser = UserModel(
+                                  id: 0,
                                   firstName: firstName,
                                   lastName: lastName,
                                   phone: phone,
                                   email: email,
                                   password: password,
-                                  address: address,
+                                  confirmPassword: confirmPassword,
                                 );
-
+                                userRepo.register(objUser).then((res) {
+                                  print(res);
+                                });
                                 print(objUser.toJson());
                                 setState(() {
-
+                                  x = x + 1;
                                 });
                               },
-                              child: const Text("Login", style: TextStyle(color: Colors.blue, fontSize: 12),),
+                              child: const Text(
+                                "Login",
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 12),
+                              ),
                             ),
                           ],
                         ),

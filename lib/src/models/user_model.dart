@@ -1,22 +1,20 @@
-import 'package:flutter/material.dart';
+class UserModel {
+  int? id;
+  String? firstName;
+  String? lastName;
+  String? phone;
+  String? email;
+  String? password;
+  String? confirmPassword;
 
-class UserModel{
-  int ? id;
-  String ? firstName;
-  String ? lastName;
-  String ? phone;
-  String ? email;
-  String ? password;
-  String ? address;
-
-UserModel({
+  UserModel({
     this.id,
     this.firstName,
     this.lastName,
     this.phone,
     this.email,
     this.password,
-    this.address,
+    this.confirmPassword,
   });
 
   //Map json to object
@@ -27,11 +25,11 @@ UserModel({
     phone = json['phone'];
     email = json['email'];
     password = json['password'];
-    address = json['address'];
+    confirmPassword = json['confirmPassword'];
   }
 
   //Map object to json or convert object to json
-  Map toJson(){
+  Map toJson() {
     var map = Map<String, dynamic>();
     map['id'] = id;
     map['firstName'] = firstName;
@@ -39,12 +37,12 @@ UserModel({
     map['phone'] = phone;
     map['email'] = email;
     map['password'] = password;
-    map['address'] = address;
+    map['confirmPassword'] = confirmPassword;
     return map;
   }
 
   @override
   String toString() {
-    return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, password: $password, address: $address}';
+    return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword}';
   }
 }
