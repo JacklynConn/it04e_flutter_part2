@@ -264,22 +264,42 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.yellow,
-                          ),
-                          child: const Text(
-                            "Register",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          var objUser = UserModel(
+                            id: 0,
+                            firstName: firstName,
+                            lastName: lastName,
+                            phone: phone,
+                            email: email,
+                            password: password,
+                            confirmPassword: confirmPassword,
+                          );
+                          userRepo.register(objUser).then((res) {
+                            print(res);
+                          });
+                          print(objUser.toJson());
+                          setState(() {
+                            x = x + 1;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.yellow,
+                            ),
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -291,22 +311,7 @@ class _RegisterState extends State<Register> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                var objUser = UserModel(
-                                  id: 0,
-                                  firstName: firstName,
-                                  lastName: lastName,
-                                  phone: phone,
-                                  email: email,
-                                  password: password,
-                                  confirmPassword: confirmPassword,
-                                );
-                                userRepo.register(objUser).then((res) {
-                                  print(res);
-                                });
-                                print(objUser.toJson());
-                                setState(() {
-                                  x = x + 1;
-                                });
+
                               },
                               child: const Text(
                                 "Login",

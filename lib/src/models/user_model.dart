@@ -29,16 +29,15 @@ class UserModel {
   }
 
   //Map object to json or convert object to json
-  Map toJson() {
-    var map = Map<String, dynamic>();
-    map['id'] = id;
-    map['firstName'] = firstName;
-    map['lastName'] = lastName;
-    map['phone'] = phone;
-    map['email'] = email;
-    map['password'] = password;
-    map['confirmPassword'] = confirmPassword;
-    return map;
+  Map<String, dynamic> toJson() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'phone': phone,
+      'email': email,
+      'password': password,
+      'confirmPassword': confirmPassword,
+    };
   }
 
   @override

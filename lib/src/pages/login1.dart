@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_part2/src/pages/register.dart';
 import '../widgets/background_widget.dart';
 
 class Login1 extends StatefulWidget {
