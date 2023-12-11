@@ -6,6 +6,8 @@ class UserModel {
   String? email;
   String? password;
   String? confirmPassword;
+  String? message;
+  String? api_token;
 
   UserModel({
     this.id,
@@ -15,6 +17,8 @@ class UserModel {
     this.email,
     this.password,
     this.confirmPassword,
+    this.message,
+    this.api_token,
   });
 
   //Map json to object
@@ -26,6 +30,7 @@ class UserModel {
     email = json['email'];
     password = json['password'];
     confirmPassword = json['confirmPassword'];
+    api_token = json['api_token'];
   }
 
   //Map object to json or convert object to json
@@ -42,6 +47,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword}';
+    return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword, message: $message, api_token: $api_token}';
   }
 }

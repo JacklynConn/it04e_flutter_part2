@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_part2/src/models/user_model.dart';
-
+import '../models/user_model.dart';
 import '../repository/user_repository.dart' as userRepo;
 import '../widgets/background_widget.dart';
+import 'home_pages.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -26,7 +26,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: BackgroundWidget(
           child: Form(
@@ -276,7 +276,13 @@ class _RegisterState extends State<Register> {
                             confirmPassword: confirmPassword,
                           );
                           userRepo.register(objUser).then((res) {
-                            print(res);
+                            if (res.message != "FAIL") {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => HomePages(),
+                                ),
+                              );
+                            }
                           });
                           print(objUser.toJson());
                           setState(() {
@@ -310,9 +316,7 @@ class _RegisterState extends State<Register> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              onPressed: () {
-
-                              },
+                              onPressed: () {},
                               child: const Text(
                                 "Login",
                                 style:
