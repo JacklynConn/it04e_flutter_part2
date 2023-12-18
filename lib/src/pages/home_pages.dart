@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_part2/src/elements/category_element.dart';
+import 'package:flutter_part2/src/elements/home_slide_element.dart';
 import '../repository/user_repository.dart' as userRopo;
 import 'login1.dart';
 
@@ -12,6 +14,8 @@ class HomePages extends StatefulWidget {
 class _HomePagesState extends State<HomePages> {
   @override
   Widget build(BuildContext context) {
+    double wScreen = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Pages"),
@@ -33,18 +37,24 @@ class _HomePagesState extends State<HomePages> {
                   const SizedBox(height: 10),
                   Text(
                     "${userRopo.current_user.value.firstName} ${userRopo.current_user.value.lastName}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     "${userRopo.current_user.value.phone}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     "${userRopo.current_user.value.email}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -62,7 +72,18 @@ class _HomePagesState extends State<HomePages> {
           ],
         ),
       ),
-      body: Container(),
+      body: Column(
+        children: [
+          const HomeSlideElement(),
+          Expanded(
+            child: ListView(
+              children: [
+                CategoryElement(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

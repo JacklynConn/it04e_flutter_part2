@@ -57,21 +57,23 @@ Future Login(UserModel userModel) async {
 
 Future<UserModel> getCurrentUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  var userPref = prefs.get("ntr_current_user");
-  current_user.value = UserModel.fromJson(json.decode(userPref.toString()));
+  var userPref = prefs.get("ntr_current_user");// get user from shared preferences
+  current_user.value = UserModel.fromJson(json.decode(userPref.toString())); // set user to value notifier
   current_user.notifyListeners();
-  return current_user.value;
+  return current_user.value; // return user
 }
 
-void setCurrentUser(jsonString) async {
+void setCurrentUser(jsonString) async { // save user to shared preferences
   try {
-    if (json.decode(jsonString) != null) {
+    if (json.decode(jsonString) != null) { // check if user is not null
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString(
+      await prefs.setString( // save user to shared preferences
           'ntr_current_user', json.encode(json.decode(jsonString)));
-      print(prefs.getString("ntr_current_user"));
+      print(prefs.getString("ntr_current_user")); // print user from shared preferences
     }
-  } catch (e) {}
+  } catch (e) {
+    print(e);
+  }
 }
 
 Future<void> logout() async {
