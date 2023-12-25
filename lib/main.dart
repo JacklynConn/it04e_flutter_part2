@@ -24,15 +24,17 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     getCurrentUser();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen() ,
+      home: const SplashScreen(),
     );
   }
 }

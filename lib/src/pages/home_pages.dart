@@ -18,7 +18,9 @@ class _HomePagesState extends State<HomePages> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Pages"),
+        title: const Text("Home Pages", style: TextStyle(color: Colors.black)),
+        centerTitle: true,
+        backgroundColor: Colors.yellow.shade200,
       ),
       drawer: Drawer(
         child: Column(
@@ -72,17 +74,32 @@ class _HomePagesState extends State<HomePages> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          const HomeSlideElement(),
-          Expanded(
-            child: ListView(
-              children: [
-                CategoryElement(),
-              ],
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.yellow.shade200,
+              Colors.white,
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomRight,
           ),
-        ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const HomeSlideElement(),
+              Expanded(
+                child: ListView(
+                  children: [
+                    CategoryElement(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
