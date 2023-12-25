@@ -1,4 +1,7 @@
 # flutter_part2
+day 7 create slider and category homepage
+![image](https://github.com/JacklynConn/it04e_flutter_part2/assets/148744079/60bac5d1-3098-49cb-a642-0f65b9cf52e1)
+
 
 A new Flutter project.
 
