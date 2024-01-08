@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_part2/global_config.dart';
-import 'package:flutter_part2/src/pages/list_motor_page.dart';
+import 'package:flutter_part2/src/pages/product_list.dart';
 import '../models/category_model.dart';
 import '../repository/category_repository.dart' as categoryRepo;
 
@@ -58,7 +58,7 @@ class _CategoryElementState extends State<CategoryElement> {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ListMotorPage(cat: item)));
+            MaterialPageRoute(builder: (context) => ProductList(data: item)));
       },
       child: Card(
         color: Colors.yellow.shade200,
