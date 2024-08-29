@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_part2/src/repository/user_repository.dart';
 import 'package:flutter_part2/src/splash_screen.dart';
-import '/src/pages/login1.dart';
-import '../src/pages/register.dart';
 
 void main() {
   runApp(const MyApp());

@@ -30,27 +30,24 @@ class _CategoryElementState extends State<CategoryElement> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: 300,
-      child: Card(
-        elevation: 1,
-        child: show_data
-            ? const Center(child: CircularProgressIndicator())
-            : GridView.builder(
-                // scrollDirection: Axis.horizontal,
-                itemCount: catList.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 2,
-                  childAspectRatio: 0.6,
-                  mainAxisSpacing: 2,
-                ),
-                itemBuilder: (context, index) {
-                  return _buildGridView(
-                    catList[index],
-                  );
-                },
+      height: 280,
+      child: show_data
+          ? const Center(child: CircularProgressIndicator())
+          : GridView.builder(
+              // scrollDirection: Axis.horizontal,
+              itemCount: catList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                crossAxisSpacing: 2,
+                childAspectRatio: 0.7,
+                mainAxisSpacing: 2,
               ),
-      ),
+              itemBuilder: (context, index) {
+                return _buildGridView(
+                  catList[index],
+                );
+              },
+            ),
     );
   }
 
@@ -64,7 +61,7 @@ class _CategoryElementState extends State<CategoryElement> {
         color: Colors.yellow.shade200,
         elevation: 1,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(top: 5, bottom: 5),
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -82,24 +79,21 @@ class _CategoryElementState extends State<CategoryElement> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 80,
+                  height: 70,
                   // width: 50,
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Image.network('$apiBaseUrl${item.images}'),
+                  child: Container(
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Image.network('$apiBaseUrl${item.images}', fit: BoxFit.cover),
                   ),
                 ),
                 Text(
-                  "${item.Name}",
+                  "${item.name}",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black54,
-                  ),
-                ),
-                Text(
-                  "${item.Code}",
-                  style: const TextStyle(
-                    color: Colors.blueAccent,
                   ),
                 ),
               ],

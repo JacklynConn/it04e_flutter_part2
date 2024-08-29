@@ -1,14 +1,14 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_part2/global_config.dart';
 import 'package:flutter_part2/src/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
 
-ValueNotifier<UserModel> current_user = new ValueNotifier(UserModel());
+ValueNotifier<UserModel> current_user = ValueNotifier(UserModel());
 
 Future register(UserModel userModel) async {
-  String url = apiUrl + "Register";
+  String url = "${apiUrl}Register";
 
   var headers = {
     'Content-Type': 'application/json',
@@ -30,8 +30,8 @@ Future register(UserModel userModel) async {
   return userModel.message = "FAIL";
 }
 
-Future Login(UserModel userModel) async {
-  String url = apiUrl + "login";
+Future login(UserModel userModel) async {
+  String url = "${apiUrl}login";
   print(url);
   print(jsonEncode(userModel.toJson()));
   var headers = {

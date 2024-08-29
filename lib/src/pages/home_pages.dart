@@ -38,7 +38,7 @@ class _HomePagesState extends State<HomePages> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "${userRopo.current_user.value.firstName} ${userRopo.current_user.value.lastName}",
+                    "${userRopo.current_user.value.name}",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -90,9 +90,17 @@ class _HomePagesState extends State<HomePages> {
           child: Column(
             children: [
               const HomeSlideElement(),
+              const SizedBox(height: 10),
+              const Text(
+                "Category",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
               Expanded(
                 child: ListView(
-                  children: [
+                  children: const [
                     CategoryElement(),
                   ],
                 ),
@@ -101,6 +109,22 @@ class _HomePagesState extends State<HomePages> {
           ),
         ),
       ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: "Cart",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile",
+            ),
+          ],
+        )
     );
   }
 }
