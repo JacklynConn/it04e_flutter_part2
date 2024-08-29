@@ -1,24 +1,25 @@
-class CategoryModel{
-  String? Name, Code, images, Active;
+class CategoryModel {
+  String? name, code, images, active;
   int? id;
 
-  CategoryModel({this.Name, this.Code, this.images, this.Active, this.id});
+  CategoryModel({this.name, this.code, this.images, this.active, this.id});
 
-  CategoryModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    Name = json['Name'];
-    Code = json['Code'];
-    images = json['images'];
-    Active = json['Active'];
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
+      name: json['Name'],
+      code: json['Code'],
+      images: json['images'],
+      active: json['Active'],
+      id: json['id'],
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Name'] = this.Name;
-    data['Code'] = this.Code;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Name'] = this.name;
+    data['Code'] = this.name;
     data['images'] = this.images;
-    data['Active'] = this.Active;
+    data['Active'] = this.active;
     return data;
   }
 }
-

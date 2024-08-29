@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void init() {
     Future.delayed(const Duration(seconds: 3), () async {
-      if (userRepo.current_user.value.api_token != null) {
+      if (userRepo.current_user.value.access_token != null) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const HomePages()));
       } else {

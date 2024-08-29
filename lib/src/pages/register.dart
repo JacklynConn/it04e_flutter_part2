@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_part2/src/pages/login1.dart';
 import '../models/user_model.dart';
 import '../repository/user_repository.dart' as userRepo;
 import '../widgets/background_widget.dart';
@@ -14,314 +15,317 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   GlobalKey<FormState> keyForm = GlobalKey<FormState>();
 
+  bool isPassword = true;
+
   int x = 0;
-  String? firstName;
-  String? lastName;
+  String? name;
   String? phone;
   String? email;
   String? password;
   String? confirmPassword;
   String? address;
 
+  void showHidePassword() {
+    setState(() {
+      isPassword = !isPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: BackgroundWidget(
-          child: Form(
-            key: keyForm,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: BackgroundWidget(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Form(
+                  key: keyForm,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Register",
-                        style: TextStyle(
-                          fontSize: 50,
-                          color: Colors.yellow,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Container(
+                        alignment: Alignment.center,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                onChanged: (value) {
-                                  setState(() {
-                                    firstName = value;
-                                  });
-                                },
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDDDDDD),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  labelText: "First Name",
-                                  prefixIcon: Icon(Icons.account_circle),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                onChanged: (value) {
-                                  lastName = value;
-                                },
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDDDDDD),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  labelText: "Last Name",
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                onChanged: (value) {
-                                  phone = value;
-                                },
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDDDDDD),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  labelText: "Phone",
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                onChanged: (value) {
-                                  email = value;
-                                },
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDDDDDD),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  labelText: "Email",
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                onChanged: (value) {
-                                  password = value;
-                                },
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDDDDDD),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  labelText: "Password",
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                onChanged: (value) {
-                                  confirmPassword = value;
-                                },
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDDDDDD),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                  labelText: "Confirm Password",
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                              ),
-                            ),
                             const Text(
-                              "Incorrect email or password",
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          var objUser = UserModel(
-                            id: 0,
-                            firstName: firstName,
-                            lastName: lastName,
-                            phone: phone,
-                            email: email,
-                            password: password,
-                            confirmPassword: confirmPassword,
-                          );
-                          userRepo.register(objUser).then((res) {
-                            if (res.message != "FAIL") {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => HomePages(),
-                                ),
-                              );
-                            }
-                          });
-                          print(objUser.toJson());
-                          setState(() {
-                            x = x + 1;
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.yellow,
-                            ),
-                            child: const Text(
                               "Register",
                               style: TextStyle(
+                                fontSize: 50,
+                                color: Colors.yellow,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.white,
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "Login",
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 12),
-                              ),
+                            const SizedBox(height: 10),
+                            Column(
+                              children: [
+                                TextField(
+                                  onChanged: (value) {
+                                    setState(() {
+                                      name = value;
+                                    });
+                                  },
+                                  decoration: const InputDecoration(
+                                    isDense: true,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(25),
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(25),
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(25),
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    labelText: "First Name",
+                                    prefixIcon: Icon(Icons.account_circle),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextField(
+                                  onChanged: (value) {
+                                    phone = value;
+                                  },
+                                  decoration: const InputDecoration(
+                                    isDense: true,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    labelText: "Phone",
+                                    prefixIcon: Icon(Icons.lock),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextField(
+                                  onChanged: (value) {
+                                    email = value;
+                                  },
+                                  decoration: const InputDecoration(
+                                    isDense: true,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    labelText: "Email",
+                                    prefixIcon: Icon(Icons.lock),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextField(
+                                  obscureText: isPassword,
+                                  onChanged: (value) {
+                                    password = value;
+                                  },
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    border: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    labelText: "Password",
+                                    prefixIcon: const Icon(Icons.lock),
+                                    suffixIcon: IconButton(
+                                      onPressed: showHidePassword,
+                                      icon: Icon(
+                                        isPassword
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  obscureText: isPassword,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Please input confirm password";
+                                    }
+                                    if (value != password) {
+                                      return "Password not match";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    confirmPassword = value;
+                                  },
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    border: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      borderSide: BorderSide(
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    labelText: "Confirm Password",
+                                    prefixIcon: const Icon(Icons.lock),
+                                    suffixIcon: IconButton(
+                                      onPressed: showHidePassword,
+                                      icon: Icon(
+                                        isPassword
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.yellow,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      if (keyForm.currentState!.validate()) {
+                                        keyForm.currentState!.save();
+                                        var objUser = UserModel(
+                                          id: 0,
+                                          name: name,
+                                          phone: phone,
+                                          email: email,
+                                          password: password,
+                                          confirmPassword: confirmPassword,
+                                        );
+                                        userRepo.register(objUser).then((res) {
+                                          if (res.message != "FAIL") {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const HomePages(),
+                                              ),
+                                            );
+                                          }
+                                        });
+                                        print(objUser.toJson());
+                                        setState(() {
+                                          x = x + 1;
+                                        });
+                                      }
+                                    },
+                                    child: const Text(
+                                      "Register",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => const Login1(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "Already have an account?",
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -329,7 +333,7 @@ class _RegisterState extends State<Register> {
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),

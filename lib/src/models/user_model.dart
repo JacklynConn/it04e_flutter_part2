@@ -1,43 +1,39 @@
 class UserModel {
   int? id;
-  String? firstName;
-  String? lastName;
+  String? name;
   String? phone;
   String? email;
   String? password;
   String? confirmPassword;
   String? message;
-  String? api_token;
+  String? access_token;
 
   UserModel({
     this.id,
-    this.firstName,
-    this.lastName,
+    this.name,
     this.phone,
     this.email,
     this.password,
     this.confirmPassword,
     this.message,
-    this.api_token,
+    this.access_token,
   });
 
   //Map json to object
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
+    name = json['name'];
     phone = json['phone'];
     email = json['email'];
     password = json['password'];
     confirmPassword = json['confirmPassword'];
-    api_token = json['api_token'];
+    access_token = json['access_token'];
   }
 
   //Map object to json or convert object to json
   Map<String, dynamic> toJson() {
     return {
-      'firstName': firstName,
-      'lastName': lastName,
+      'name': name,
       'phone': phone,
       'email': email,
       'password': password,
@@ -47,6 +43,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword, message: $message, api_token: $api_token}';
+    return 'UserModel{id: $id, name: $name, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword, message: $message, api_token: $access_token}';
   }
 }
